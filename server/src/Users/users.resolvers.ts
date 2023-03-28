@@ -1,5 +1,4 @@
-/* import usersSchema from "./users.model"; */
-import { getUsers, signup, httpLogin } from "./model";
+import { getUsers, signup, httpLogin, httpGetUser } from "./model";
 
 module.exports = {
   Query: {
@@ -8,6 +7,9 @@ module.exports = {
     },
     login: (_: null, args: any) => {
       return httpLogin(args.user);
+    },
+    getUser: (_: null, args: any) => {
+      return httpGetUser(args.id);
     },
   },
   Mutation: {

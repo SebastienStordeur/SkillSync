@@ -1,34 +1,35 @@
 import mongoose, { now } from "mongoose";
 
-const usersSchema = new mongoose.Schema({
-  firstname: {
+const jobsSchema = new mongoose.Schema({
+  title: {
     type: String,
-    minLength: 2,
-    maxLength: 40,
+    maxLength: 500,
+    minLength: 15,
+    required: true,
   },
-  lastname: {
+  description: {
     type: String,
-    minLength: 2,
-    maxLength: 40,
   },
   company: {
     type: String,
     minLength: 2,
+    required: true,
   },
-  is_company: {
+  salary: {
+    type: Number,
+    required: true,
+  },
+  location: {
+    type: String,
+    default: null,
+  },
+  remote: {
     type: Boolean,
-    required: true,
-    default: false,
+    default: null,
   },
-  email: {
-    type: String,
-    unique: true,
-    maxLength: 200,
-    required: true,
-  },
-  password: {
-    type: String,
-    minLength: 8,
+  still_accept: {
+    type: Boolean,
+    default: true,
     required: true,
   },
   created_at: {
@@ -43,4 +44,4 @@ const usersSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("User", usersSchema);
+export default mongoose.model("Job", jobsSchema);

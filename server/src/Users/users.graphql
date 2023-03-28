@@ -1,6 +1,7 @@
 type Query {
   getUsers: [User]
   login(user: UserInput): LoginResponse
+  getUser(id: ID): User
 }
 
 type Mutation {
@@ -10,7 +11,7 @@ type Mutation {
 type User {
   id: ID
   email: String!
-  password: String!
+  password: String
 }
 
 input UserInput {
@@ -18,7 +19,7 @@ input UserInput {
   password: String!
 }
 
-type Token {
+type ID {
   token: String
 }
 

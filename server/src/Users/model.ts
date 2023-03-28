@@ -20,7 +20,7 @@ export async function signup(user: UserSignup) {
     });
 
     await newUser.save();
-    return hashedPassword;
+    return newUser;
   } catch (error) {
     return error;
   }
@@ -53,4 +53,12 @@ export async function httpLogin(user: { email: string; password: string }) {
     console.log(error);
     return { success: false, message: "An error occurred during login", token: null };
   }
+}
+
+export async function httpGetUser(id: string) {
+  try {
+    //need to check if token
+    const user = await User.findOne({ _id: id });
+    return user;
+  } catch (error) {}
 }
