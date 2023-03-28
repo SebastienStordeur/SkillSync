@@ -1,11 +1,18 @@
 /* import usersSchema from "./users.model"; */
-import { signup } from "./model";
+import { getUsers, signup, httpLogin } from "./model";
 
 module.exports = {
-  Query: {},
+  Query: {
+    getUsers: () => {
+      return getUsers();
+    },
+    login: (_: null, args: any) => {
+      return httpLogin(args.user);
+    },
+  },
   Mutation: {
-    signup: (_: any, args: any) => {
-      return args.user;
+    signup: (_: null, args: any) => {
+      return signup(args.user);
     },
   },
 };

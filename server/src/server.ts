@@ -5,6 +5,8 @@ import { ApolloServer } from "apollo-server-express";
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
+require("dotenv").config();
+
 const PORT = process.env.PORT || 4000;
 
 /** GraphQL config */
@@ -12,6 +14,7 @@ const typesArray = loadFilesSync(path.join(__dirname, "**/*.graphql"));
 const resolversArray = loadFilesSync(path.join(__dirname, "**/*.resolvers.ts"));
 
 /** mongoDB connection */
+const MONGO_URL = process.env.MONGO_URL!;
 mongoose.connection.on("open", (err) => {
   console.log("Connected to MongoDB");
 });
@@ -26,10 +29,10 @@ async function startAppoloServer() {
     typeDefs: typesArray,
     resolvers: resolversArray,
   });
-
   const server = new ApolloServer({ schema });
 
   await server.start();
+  await mongoose.connect(MONGO_URL);
   server.applyMiddleware({ app, path: "/graphql" });
 
   app.listen(PORT, () => {
