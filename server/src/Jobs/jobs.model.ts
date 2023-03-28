@@ -25,7 +25,7 @@ const jobsSchema = new mongoose.Schema({
   },
   remote: {
     type: Boolean,
-    default: null,
+    default: false,
   },
   still_accept: {
     type: Boolean,
