@@ -2,6 +2,12 @@
 
 import { httpCreateJob, httpDeleteJob } from "./jobs.controller";
 
+function ensureAuthenticated(context: any) {
+  if (!context.user) {
+    throw new Error("Not authenticated");
+  }
+}
+
 module.exports = {
   Query: {
     //get jobs offers
@@ -9,13 +15,15 @@ module.exports = {
     //get offer with specific entitlement
   },
   Mutation: {
-    createJob: (_: null, args: any) => {
+    createJob: (_: null, args: any, context: any) => {
+      ensureAuthenticated(context);
       return httpCreateJob(args.job);
     },
-    // update job offers
-    //delete
-    deleteJob: (_: null, args: { id: string }) => {
+    deleteJob: (_: null, args: { id: string }, context: any) => {
+      ensureAuthenticated(context);
       return httpDeleteJob(args.id);
     },
+
+    // update job offers
   },
 };

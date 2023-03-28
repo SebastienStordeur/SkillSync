@@ -4,7 +4,7 @@ type Query {
 
 type Mutation {
   createJob(job: JobInput): Job
-  deleteJob(id: String): DeleteJobResponse
+  deleteJob(id: ID!): DeleteJobResponse
 }
 
 type Job {

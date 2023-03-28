@@ -6,6 +6,7 @@ import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import authenticateToken from "./middlewares/auth";
 
 require("dotenv").config();
 
@@ -34,7 +35,18 @@ async function startAppoloServer() {
     resolvers: resolversArray,
   });
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({
+    schema,
+    context: ({ req }) => {
+      try {
+        const user = authenticateToken(req);
+        return { user };
+      } catch (error) {
+        console.log(error);
+        return { user: null };
+      }
+    },
+  });
 
   await server.start();
   await mongoose.connect(MONGO_URL);
