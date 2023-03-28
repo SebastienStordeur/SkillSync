@@ -1,4 +1,4 @@
-import { getUsers, signup, httpLogin, httpGetUser } from "./model";
+import { getUsers, signup, httpLogin, httpGetUser } from "./users.controller";
 
 module.exports = {
   Query: {

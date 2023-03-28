@@ -1,6 +1,6 @@
 // import functions
 
-import { httpCreateJob } from "./model";
+import { httpCreateJob, httpDeleteJob } from "./jobs.controller";
 
 module.exports = {
   Query: {
@@ -10,11 +10,12 @@ module.exports = {
   },
   Mutation: {
     createJob: (_: null, args: any) => {
-      console.log(args.job);
       return httpCreateJob(args.job);
     },
-    //post job offers
     // update job offers
     //delete
+    deleteJob: (_: null, args: { id: string }) => {
+      return httpDeleteJob(args.id);
+    },
   },
 };
