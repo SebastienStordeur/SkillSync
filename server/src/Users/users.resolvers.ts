@@ -1,12 +1,17 @@
-import { getUsers, signup, httpLogin, httpGetUser } from "./users.controller";
+import { signup, httpLogin, httpGetUser } from "./users.controller";
+
+function ensureAuthenticated(context: any) {
+  if (!context.user) {
+    throw new Error("Not authenticated");
+  }
+}
 
 module.exports = {
   Query: {
-    getUsers: () => {
-      return getUsers();
-    },
-    getUser: (_: null, args: any) => {
-      return httpGetUser(args.id);
+    // Get current user using their ID from the context.
+    GetCurrentUser: (_: null, args: null, context: any) => {
+      ensureAuthenticated(context);
+      return httpGetUser(context.user.id);
     },
   },
   Mutation: {

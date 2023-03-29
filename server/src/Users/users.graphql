@@ -1,6 +1,5 @@
 type Query {
-  getUsers: [User]
-  getUser(id: ID): User
+  GetCurrentUser(id: ID): User
 }
 
 type Mutation {

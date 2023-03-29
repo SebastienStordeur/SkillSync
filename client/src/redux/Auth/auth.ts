@@ -24,6 +24,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    /**
+     * Login reducer used after a successful Login request
+     * Store the token and set the global isAuthenticated State to true
+     * @param state
+     * @param action
+     */
+
     login(state, action: PayloadAction<LoginInterface>) {
       const payload = action.payload;
       localStorage.setItem("token", payload.token);
@@ -33,7 +40,17 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       return (state = initialState);
     },
-    getProfile() {},
+
+    /**
+     * Get the current user informations and fill the global state user
+     * @param state
+     * @param action
+     */
+
+    getProfile(state, action) {
+      const payload = action.payload;
+      //payload = id, displayable name || company, is_company, applications
+    },
     retriveStoredToken(state) {
       state.isAuthenticated = true;
     },

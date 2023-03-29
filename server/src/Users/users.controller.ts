@@ -8,6 +8,11 @@ type UserSignup = {
   password: string;
 };
 
+/**
+ *
+ * @param user
+ * @returns
+ */
 export async function signup(user: UserSignup) {
   try {
     const { email, password } = user;
@@ -26,10 +31,11 @@ export async function signup(user: UserSignup) {
   }
 }
 
-export async function getUsers() {
-  return await User.find();
-}
-
+/**
+ *
+ * @param user
+ * @returns
+ */
 export async function httpLogin(user: { email: string; password: string }) {
   try {
     const { email, password } = user;
@@ -55,10 +61,22 @@ export async function httpLogin(user: { email: string; password: string }) {
   }
 }
 
+/**
+ * Get user by ID.
+ * @param {string} id - User ID.
+ * @returns {Promise} Resolves to the user if found, otherwise an error message.
+ */
+
 export async function httpGetUser(id: string) {
   try {
-    //need to check if token
     const user = await User.findOne({ _id: id });
+
+    if (!user) {
+      return { success: false, message: "Cannot reach this user" };
+    }
+
     return user;
-  } catch (error) {}
+  } catch (error) {
+    return { success: false, message: "Error occured while fetching the user" };
+  }
 }
