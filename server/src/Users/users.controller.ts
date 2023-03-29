@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";
 import User from "./users.model";
 
 type UserSignup = {
+  lastname: string;
+  firstname: string;
+  company: string;
   email: string;
   password: string;
 };
@@ -15,11 +18,15 @@ type UserSignup = {
  */
 export async function signup(user: UserSignup) {
   try {
-    const { email, password } = user;
+    const { lastname, firstname, company, email, password } = user;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser: any = new User({
+      lastname: lastname.trim().length >= 2 ? lastname : null,
+      firstname: firstname.trim().length >= 2 ? firstname : null,
+      company,
+      is_company: company ? true : false,
       email,
       password: hashedPassword,
     });
