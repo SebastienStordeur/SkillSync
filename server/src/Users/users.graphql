@@ -1,11 +1,11 @@
 type Query {
   getUsers: [User]
-  login(user: UserInput): LoginResponse
   getUser(id: ID): User
 }
 
 type Mutation {
   signup(user: UserInput): User
+  login(user: UserInput): LoginResponse
 }
 
 type User {
