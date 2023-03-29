@@ -42,6 +42,10 @@ const jobsSchema = new mongoose.Schema({
     default: now,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Job", jobsSchema);

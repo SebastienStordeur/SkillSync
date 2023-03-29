@@ -31,6 +31,10 @@ const usersSchema = new mongoose.Schema({
     minLength: 8,
     required: true,
   },
+  applications: {
+    type: Array,
+    default: [],
+  },
   created_at: {
     type: Date,
     default: now,
