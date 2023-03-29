@@ -10,17 +10,30 @@ type Mutation {
 
 type User {
   id: ID
+  firstname: String
+  lastname: String
+  company: String
+  is_company: Boolean
   email: String!
   password: String
+  applications: [String]
 }
 
 input UserInput {
+  firstname: String
+  lastname: String
+  company: String
   email: String!
   password: String!
 }
 
 type ID {
   token: String
+}
+
+type SignupResponse {
+  success: Boolean!
+  message: String
 }
 
 type LoginResponse {

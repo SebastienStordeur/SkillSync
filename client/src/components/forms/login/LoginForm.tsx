@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef } from "react";
+import React, { FC, FormEvent, useRef } from "react";
 import { useMutation, gql } from "@apollo/client";
 
 const LOGIN_MUTATION = gql`
@@ -11,17 +11,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-/* const LOGIN_QUERY = gql`
-  query login($email: String!, $password: String!) {
-    login(user: { email: $email, password: $password }) {
-      success
-      message
-      token
-    }
-  }
-`; */
-
-const LoginForm: React.FC = () => {
+const LoginForm: FC = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,6 +34,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <form onSubmit={handleLogin}>
+      LOGIN
       <input type="email" placeholder="email" ref={emailInputRef}></input>
       <input type="password" placeholder="password" ref={passwordInputRef}></input>
       <button type="submit">LOgin</button>

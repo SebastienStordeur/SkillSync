@@ -5,7 +5,6 @@ module.exports = {
     getUsers: () => {
       return getUsers();
     },
-
     getUser: (_: null, args: any) => {
       return httpGetUser(args.id);
     },
