@@ -46,7 +46,7 @@ export async function httpGetJobs() {
     const jobs = await Job.find();
     return jobs;
   } catch (error) {
-    return;
+    return { success: false, message: "An error has occured. Try again later." };
   }
 }
 

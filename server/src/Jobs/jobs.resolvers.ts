@@ -1,5 +1,3 @@
-// import functions
-
 import { httpCreateJob, httpDeleteJob, httpGetJob, httpGetJobs } from "./jobs.controller";
 
 function ensureAuthenticated(context: any) {

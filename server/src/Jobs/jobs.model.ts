@@ -32,6 +32,10 @@ const jobsSchema = new mongoose.Schema({
     default: true,
     required: true,
   },
+  applicant_number: {
+    type: Array,
+    default: [],
+  },
   created_at: {
     type: Date,
     default: now,
