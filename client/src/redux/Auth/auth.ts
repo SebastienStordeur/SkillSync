@@ -5,6 +5,7 @@ type AuthSliceState = {
   user: {
     id: string | null;
     displayableName: string | null;
+    applications: string[];
   };
 };
 
@@ -17,6 +18,7 @@ const initialState: AuthSliceState = {
   user: {
     id: null,
     displayableName: null,
+    applications: [],
   },
 };
 
@@ -48,7 +50,10 @@ const authSlice = createSlice({
      */
 
     getProfile(state, action) {
-      const payload = action.payload;
+      const payload = action.payload.currentUser;
+      state.user.id = payload.id;
+      state.user.displayableName = payload.email;
+      state.user.applications = payload.applications;
       //payload = id, displayable name || company, is_company, applications
     },
     retriveStoredToken(state) {

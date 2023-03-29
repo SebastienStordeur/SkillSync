@@ -9,9 +9,10 @@ function ensureAuthenticated(context: any) {
 module.exports = {
   Query: {
     // Get current user using their ID from the context.
-    GetCurrentUser: (_: null, args: null, context: any) => {
+    GetCurrentUser: (_: null, args: { id: string | null }, context: any) => {
       ensureAuthenticated(context);
-      return httpGetUser(context.user.id);
+      const userId = args.id || context.user.id;
+      return httpGetUser(userId);
     },
   },
   Mutation: {
