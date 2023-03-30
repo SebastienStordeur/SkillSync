@@ -1,21 +1,7 @@
 import { FC, FormEvent, useRef } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 import SIGNUP_MUTATION from "../../../graphql/MUTATION/Signup.mutation";
-
-/* const SIGNUP_MUTATION = gql`
-  mutation signup($lastname: String, $firstname: String, $company: String, $email: String!, $password: String!) {
-    signup(
-      user: { lastname: $lastname, firstname: $firstname, company: $company, email: $email, password: $password }
-    ) {
-      id
-      lastname
-      firstname
-      company
-      email
-    }
-  }
-`; */
 
 const SignupForm: FC = () => {
   const firstnameInputRef = useRef<HTMLInputElement>(null);
