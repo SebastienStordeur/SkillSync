@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-  createJob(job: JobInput, userId: ID!): Job
+  createJob(job: JobInput, userId: ID): Job
   deleteJob(id: ID!, userId: ID!): DeleteJobResponse
 }
 
@@ -13,17 +13,17 @@ type Job {
   title: String
   description: String
   company: String!
-  salary: Int!
+  salary: Int
   location: String
   remote: Boolean
-  userId: ID!
+  userId: ID
 }
 
 input JobInput {
   title: String!
   description: String
   company: String!
-  salary: Int!
+  salary: Int
   location: String
   remote: Boolean
 }

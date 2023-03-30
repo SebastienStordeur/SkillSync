@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useRef } from "react";
+import { FC, FormEvent, useRef } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/Auth/auth";
@@ -26,16 +26,22 @@ const LoginForm: FC = () => {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
 
-    const result = await login({ variables: { email, password } });
+    try {
+      const response = await login({ variables: { email, password } });
 
-    const { success, message, token } = result.data.login;
+      if (response.data) {
+        const { success, message, token } = response.data.login;
 
-    if (success) {
-      const payload = { token };
-      dispatch(authActions.login(payload));
+        if (success) {
+          const payload = { token };
+          dispatch(authActions.login(payload));
+        }
+
+        console.log(success, message, token);
+      }
+    } catch (error) {
+      console.error("Error during login: ", error);
     }
-
-    console.log(success, message, token);
   };
 
   return (

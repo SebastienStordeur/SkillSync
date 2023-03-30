@@ -1,14 +1,13 @@
-import { StringExpressionOperatorReturningObject } from "mongoose";
 import Job from "./jobs.model";
 
-export async function httpCreateJob(job: any, userId: StringExpressionOperatorReturningObject) {
-  const { title, description, company, salary, location, remote } = job;
+export async function httpCreateJob(job: any, userId: string) {
+  const { title, description, company, location, remote } = job;
 
   const newJob = new Job({
     title,
     description,
     company,
-    salary,
+
     location,
     remote,
     userId,
@@ -16,7 +15,7 @@ export async function httpCreateJob(job: any, userId: StringExpressionOperatorRe
 
   //checking if required fields are here
   //validating fields
-  await newJob.save();
+  /* await newJob.save(); */
   return newJob;
 }
 

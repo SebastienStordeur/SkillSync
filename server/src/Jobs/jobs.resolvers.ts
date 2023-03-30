@@ -14,12 +14,12 @@ module.exports = {
     getJob: (_: null, args: { id: string }) => {
       return httpGetJob(args.id);
     },
-    //get offer with specific entitlement
+    //get offer with specific entitlement =AKA SEARCh
   },
   Mutation: {
     createJob: (_: null, args: any, context: any) => {
       ensureAuthenticated(context);
-      const userId = context.user.id;
+      const userId = args.id || context.user.id;
       return httpCreateJob(args.job, userId);
     },
     deleteJob: (_: null, args: { id: string }, context: any) => {

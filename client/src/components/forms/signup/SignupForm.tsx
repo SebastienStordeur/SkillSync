@@ -33,11 +33,11 @@ const SignupForm: FC = () => {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
 
-    console.log(company);
+    const response = await signup({ variables: { lastname, firstname, company, email, password } });
 
-    const result = await signup({ variables: { lastname, firstname, company, email, password } });
+    //Show messages for error and success
 
-    console.log(result.data.signup);
+    console.log(response.data.signup);
   };
   return (
     <form onSubmit={handleSubmit}>
