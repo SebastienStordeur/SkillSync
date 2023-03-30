@@ -1,13 +1,14 @@
 import Job from "./jobs.model";
 
 export async function httpCreateJob(job: any, userId: string) {
-  const { title, description, company, location, remote } = job;
+  const { title, description, company, salary, location, remote } = job;
 
+  console.log(job);
   const newJob = new Job({
     title,
     description,
     company,
-
+    salary,
     location,
     remote,
     userId,

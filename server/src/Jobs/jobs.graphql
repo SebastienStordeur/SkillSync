@@ -13,7 +13,7 @@ type Job {
   title: String
   description: String
   company: String!
-  salary: Int
+  salary: Int!
   location: String
   remote: Boolean
   userId: ID
