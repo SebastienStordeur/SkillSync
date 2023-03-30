@@ -4,7 +4,7 @@ type Query {
 
 type Mutation {
   signup(user: UserInput): User
-  login(user: UserInput): LoginResponse
+  login(user: LoginInput!): LoginResponse
 }
 
 type User {
@@ -22,6 +22,11 @@ input UserInput {
   firstname: String
   lastname: String
   company: String
+  email: String!
+  password: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }

@@ -2,16 +2,7 @@ import { FC, FormEvent, useRef } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/Auth/auth";
-
-const LOGIN_MUTATION = gql`
-  mutation login($email: String!, $password: String!) {
-    login(user: { email: $email, password: $password }) {
-      success
-      message
-      token
-    }
-  }
-`;
+import LOGIN_MUTATION from "../../../graphql/MUTATION/Login.mutation";
 
 const LoginForm: FC = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -26,8 +17,10 @@ const LoginForm: FC = () => {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
 
+    const loginInput = { email, password };
+
     try {
-      const response = await login({ variables: { email, password } });
+      const response = await login({ variables: { user: loginInput } });
 
       if (response.data) {
         const { success, message, token } = response.data.login;

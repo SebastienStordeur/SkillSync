@@ -1,7 +1,9 @@
 import { FC, FormEvent, useRef } from "react";
 import { gql, useMutation } from "@apollo/client";
 
-const SIGNUP_MUTATION = gql`
+import SIGNUP_MUTATION from "../../../graphql/MUTATION/Signup.mutation";
+
+/* const SIGNUP_MUTATION = gql`
   mutation signup($lastname: String, $firstname: String, $company: String, $email: String!, $password: String!) {
     signup(
       user: { lastname: $lastname, firstname: $firstname, company: $company, email: $email, password: $password }
@@ -13,7 +15,7 @@ const SIGNUP_MUTATION = gql`
       email
     }
   }
-`;
+`; */
 
 const SignupForm: FC = () => {
   const firstnameInputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +35,15 @@ const SignupForm: FC = () => {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
 
-    const response = await signup({ variables: { lastname, firstname, company, email, password } });
+    const signupInput = {
+      lastname,
+      firstname,
+      company,
+      email,
+      password,
+    };
+
+    const response = await signup({ variables: { user: signupInput } });
 
     //Show messages for error and success
 

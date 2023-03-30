@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { FC, useRef, FormEvent, useState } from "react";
-import CREATE_JOB_MUTATION from "../../../graphql/MUTATION/CreateJob";
+import CREATE_JOB_MUTATION from "../../../graphql/MUTATION/CreateJob.mutation";
 
 const CreateJobForm: FC = () => {
   const titleInputRef = useRef<HTMLInputElement>(null);
@@ -16,14 +16,16 @@ const CreateJobForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    const title = titleInputRef.current?.value;
-    const description = descriptionInputRef.current?.value;
-    const company = companyInputRef.current?.value;
-    const salary = +salaryInputRef.current!.value;
-    const location = locationInputRef.current?.value;
-    const remote = isRemote;
+    const jobInput = {
+      title: titleInputRef.current?.value,
+      description: descriptionInputRef.current?.value,
+      company: companyInputRef.current?.value,
+      salary: +salaryInputRef.current!.value,
+      location: locationInputRef.current?.value,
+      remote: isRemote,
+    };
 
-    const response = await createJob({ variables: { title, description, company, salary, location, remote } });
+    const response = await createJob({ variables: { job: jobInput } });
     console.log(response.data.createJob);
   };
 
