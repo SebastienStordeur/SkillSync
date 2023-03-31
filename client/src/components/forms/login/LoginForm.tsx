@@ -1,5 +1,5 @@
 import { FC, FormEvent, useRef } from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/Auth/auth";
 import LOGIN_MUTATION from "../../../graphql/MUTATION/Login.mutation";

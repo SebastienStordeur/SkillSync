@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { FC, useRef, FormEvent, useState, ChangeEvent } from "react";
+import { FC, FormEvent, useState, ChangeEvent } from "react";
 import CREATE_JOB_MUTATION from "../../../graphql/MUTATION/CreateJob.mutation";
 
 const CreateJobForm: FC = () => {
@@ -25,6 +25,8 @@ const CreateJobForm: FC = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    // Validation passing jobInput and checking each field one by one
 
     const response = await createJob({ variables: { job: jobInput } });
     console.log(response.data.createJob);
