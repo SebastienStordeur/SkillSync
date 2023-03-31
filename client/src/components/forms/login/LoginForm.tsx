@@ -1,8 +1,9 @@
-import { FC, FormEvent, useRef } from "react";
+import { FC, FormEvent, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../redux/Auth/auth";
 import LOGIN_MUTATION from "../../../graphql/MUTATION/Login.mutation";
+import { Button, TextField } from "@mui/material";
 
 const LoginForm: FC = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -13,6 +14,7 @@ const LoginForm: FC = () => {
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
+    const [loginInput, setLoginInput] = useState({});
 
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
@@ -38,11 +40,13 @@ const LoginForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      LOGIN
-      <input type="email" placeholder="email" ref={emailInputRef}></input>
-      <input type="password" placeholder="password" ref={passwordInputRef}></input>
-      <button type="submit">LOgin</button>
+    <form onSubmit={handleLogin} className="form">
+      <h2>Login</h2>
+      <TextField type="email" ref={emailInputRef} label="Email" size="small" />
+      <TextField type="password" ref={passwordInputRef} label="Password" size="small" />
+      <Button variant="contained" type="submit">
+        Login
+      </Button>
     </form>
   );
 };

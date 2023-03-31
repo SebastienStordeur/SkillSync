@@ -35,7 +35,7 @@ const CreateJobForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      CREATE JOB FORM <br />
+      <h2>CREATE JOB</h2>
       <TextField
         name="title"
         value={jobInput.title}

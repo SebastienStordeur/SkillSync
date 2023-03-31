@@ -2,6 +2,7 @@ import { FC, FormEvent, useRef } from "react";
 import { useMutation } from "@apollo/client";
 
 import SIGNUP_MUTATION from "../../../graphql/MUTATION/Signup.mutation";
+import { Button, TextField } from "@mui/material";
 
 const SignupForm: FC = () => {
   const firstnameInputRef = useRef<HTMLInputElement>(null);
@@ -36,14 +37,16 @@ const SignupForm: FC = () => {
     console.log(response.data.signup);
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form">
       SIGNUP
-      <input type="text" placeholder="lastname" ref={lastnameInputRef} />
-      <input type="text" placeholder="firstname" ref={firstnameInputRef} />
-      <input type="text" placeholder="company" ref={companyInputRef} />
-      <input type="email" placeholder="email" ref={emailInputRef} />
-      <input type="password" placeholder="psw" ref={passwordInputRef} />
-      <button type="submit">Signup</button>
+      <TextField type="text" placeholder="lastname" ref={lastnameInputRef} size="small" />
+      <TextField type="text" placeholder="firstname" ref={firstnameInputRef} size="small" />
+      <TextField type="text" placeholder="company" ref={companyInputRef} size="small" />
+      <TextField type="email" placeholder="email" ref={emailInputRef} size="small" />
+      <TextField type="password" placeholder="psw" ref={passwordInputRef} size="small" />
+      <Button variant="contained" type="submit">
+        Login
+      </Button>
     </form>
   );
 };
