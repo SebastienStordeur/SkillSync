@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { FC, FormEvent, useState, ChangeEvent } from "react";
 import CREATE_JOB_MUTATION from "../../../graphql/MUTATION/CreateJob.mutation";
+import { Button, Checkbox, TextField } from "@mui/material";
 
 const CreateJobForm: FC = () => {
   const [jobInput, setJobInput] = useState({
@@ -33,33 +34,54 @@ const CreateJobForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form">
       CREATE JOB FORM <br />
-      <input type="text" placeholder="title" name="title" value={jobInput.title} onChange={handleInputChange} />
-      <input
-        type="text"
-        placeholder="description"
+      <TextField
+        name="title"
+        value={jobInput.title}
+        onChange={handleInputChange}
+        label="Title"
+        variant="outlined"
+        size="small"
+      />
+      <TextField
         name="description"
         value={jobInput.description}
         onChange={handleInputChange}
+        label="Description"
+        variant="outlined"
+        size="small"
       />
-      <input type="text" placeholder="company" name="company" value={jobInput.company} onChange={handleInputChange} />
-      <input type="number" placeholder="salary" name="salary" value={jobInput.salary} onChange={handleInputChange} />
-      <input
+      <TextField
+        name="company"
+        value={jobInput.company}
+        onChange={handleInputChange}
+        label="Company"
+        variant="outlined"
+        size="small"
+      />
+      <TextField
+        type="number"
+        name="salary"
+        value={jobInput.salary}
+        onChange={handleInputChange}
+        label="Salary"
+        variant="outlined"
+        size="small"
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+      />
+      <TextField
         type="text"
         placeholder="location"
         name="location"
         value={jobInput.location}
         onChange={handleInputChange}
+        size="small"
       />
-      <input
-        type="checkbox"
-        checked={jobInput.remote}
-        name="remote"
-        onChange={handleInputChange}
-        placeholder="remote"
-      />
-      <button type="submit">SUBMIT</button>
+      <Checkbox checked={jobInput.remote} name="remote" onChange={handleInputChange} /* label="Remote"  */ />
+      <Button variant="contained" type="submit">
+        Submit
+      </Button>
     </form>
   );
 };
