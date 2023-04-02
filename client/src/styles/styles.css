@@ -11,6 +11,9 @@ form {
   flex-direction: column;
   padding: 16px;
 }
+form h2 {
+  margin-bottom: 16px;
+}
 .form > div {
   margin: 8px 0;
 }

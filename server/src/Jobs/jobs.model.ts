@@ -4,7 +4,7 @@ const jobsSchema = new mongoose.Schema({
   title: {
     type: String,
     maxLength: 500,
-    minLength: 15,
+    minLength: 5,
     required: true,
   },
   description: {
