@@ -3,8 +3,9 @@ import { useMutation } from "@apollo/client";
 
 import SIGNUP_MUTATION from "../../../graphql/MUTATION/Signup.mutation";
 import { Button, TextField } from "@mui/material";
+import { ToggleForm } from "../login/LoginForm";
 
-const SignupForm: FC = () => {
+const SignupForm: FC<ToggleForm> = ({ onToggle }) => {
   const [signupInput, setSignupInput] = useState({
     lastname: "",
     firstname: "",
@@ -35,7 +36,7 @@ const SignupForm: FC = () => {
   };
   return (
     <form onSubmit={handleSubmit} className="form">
-      <h2>Signup</h2>
+      <h2 className="font-semibold text-3xl">Signup</h2>
       <TextField
         type="text"
         name="lastname"
@@ -79,6 +80,12 @@ const SignupForm: FC = () => {
       <Button variant="contained" type="submit">
         Login
       </Button>
+      <p className="text-center mt-1">
+        Already have an account? &nbsp;
+        <span className="text-blue font-bold cursor-pointer" onClick={onToggle}>
+          Login
+        </span>
+      </p>
     </form>
   );
 };

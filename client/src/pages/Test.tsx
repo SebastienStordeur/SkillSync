@@ -1,8 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { FC } from "react";
+import { FC } from "react";
 import CreateJobForm from "../components/forms/createJob/CreateJobForm";
-import LoginForm from "../components/forms/login/LoginForm";
-import SignupForm from "../components/forms/signup/SignupForm";
 
 const GETJOBS_QUERY = gql`
   query getJobs {
@@ -20,8 +18,8 @@ const Test: FC = () => {
   console.log(data ? data.getJobs : null);
   return (
     <div>
-      <LoginForm />
-      <SignupForm />
+      {/*       <LoginForm />
+      <SignupForm /> */}
       <CreateJobForm />
     </div>
   );

@@ -44,6 +44,7 @@ export async function httpDeleteJob(id: string, userId: string) {
 export async function httpGetJobs() {
   try {
     const jobs = await Job.find();
+    console.log(jobs);
     return jobs;
   } catch (error) {
     return { success: false, message: "An error has occured. Try again later." };
