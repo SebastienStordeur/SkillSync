@@ -8,6 +8,7 @@ const GETJOBS_QUERY = gql`
       salary
       company
       remote
+      location
     }
   }
 `;
