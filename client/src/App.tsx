@@ -9,6 +9,8 @@ const GET_PROFILE_QUERY = gql`
     GetCurrentUser {
       id
       email
+      lastname
+      firstname
       applications
     }
   }

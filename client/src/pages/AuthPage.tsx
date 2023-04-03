@@ -7,10 +7,10 @@ const AuthPage = () => {
 
   const handleFormToggle = () => setLoginIsVisible((prev) => !prev);
   return (
-    <div className="h-screen">
+    <section className="h-screen">
       {loginIsVisible && <LoginForm onToggle={handleFormToggle} />}
       {!loginIsVisible && <SignupForm onToggle={handleFormToggle} />}
-    </div>
+    </section>
   );
 };
 

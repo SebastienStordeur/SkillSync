@@ -9,25 +9,27 @@ const Navbar: FC = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const currentUser = useSelector((state: RootState) => state.auth.user);
 
-  console.log(currentUser);
   const dispatch = useDispatch();
   return (
     <nav className="flex justify-between items-center h-16 px-6">
       <ul>
-        <li>Home</li>
+        <li>Find Job</li>
         <li></li>
         <li></li>
       </ul>
-      <TextField label="Search a job" size="small"></TextField>
+      <TextField label="Search a job" size="small" />
       {!isAuthenticated && (
         <Link to="/auth">
           <Button variant="outlined">Login</Button>
         </Link>
       )}
       {isAuthenticated && (
-        <Button variant="outlined" onClick={() => dispatch(authActions.logout())}>
-          Logout
-        </Button>
+        <div>
+          <span>{currentUser.displayableName}</span>
+          <Button variant="outlined" onClick={() => dispatch(authActions.logout())}>
+            Logout
+          </Button>
+        </div>
       )}
     </nav>
   );

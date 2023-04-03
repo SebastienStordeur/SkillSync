@@ -51,8 +51,9 @@ const authSlice = createSlice({
 
     getProfile(state, action) {
       const payload = action.payload.currentUser;
+      const displayName = `${payload.firstname} ${payload.lastname}`;
       state.user.id = payload.id;
-      state.user.displayableName = payload.email;
+      state.user.displayableName = displayName;
       state.user.applications = payload.applications;
       //payload = id, displayable name || company, is_company, applications
     },

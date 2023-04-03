@@ -4,12 +4,14 @@ import { RootState } from "../redux/index";
 import HomePage from "../pages/HomePage";
 import JobPage from "../pages/JobPage";
 import AuthPage from "../pages/AuthPage";
+import Navbar from "../components/layout/Navbar";
 
 const Router = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/job/:jobId" element={<JobPage />} />
