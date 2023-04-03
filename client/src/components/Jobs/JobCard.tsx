@@ -1,22 +1,16 @@
-import { Box, Container, Typography } from "@mui/material";
-import React from "react";
+import { FC } from "react";
 
-const JobCard = (props: any) => {
-  console.log(props);
+const JobCard: FC = (props: any) => {
   const { title, salary, company } = props;
   return (
-    <Container>
-      <Box></Box>
-      <Box flex={1} flexDirection={"row"} sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h2" fontSize="22px">
-          {title}
-        </Typography>
-        <Typography variant="h3" fontSize="22px">
-          {salary}€
-        </Typography>
-      </Box>
+    <article className="p-6 mx-auto w-3/4 max-w-4xl h-40 border">
+      <div className="flex justify-between text-xl">
+        <h2 className="">{title}</h2>
+        <h3>{salary} €</h3>
+      </div>
+
       <p>{company}</p>
-    </Container>
+    </article>
   );
 };
 

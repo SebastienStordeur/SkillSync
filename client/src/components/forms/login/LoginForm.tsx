@@ -11,6 +11,7 @@ export interface ToggleForm {
 
 const LoginForm: FC<ToggleForm> = ({ onToggle }) => {
   const [loginInput, setLoginInput] = useState({ email: "", password: "" });
+  const [emailHasError, setEmailHasError] = useState({ hasError: false, errorMessage: "" });
   const dispatch = useDispatch();
   const [login, { data, error, loading }] = useMutation(LOGIN_MUTATION);
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,8 +28,14 @@ const LoginForm: FC<ToggleForm> = ({ onToggle }) => {
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
 
+    setEmailHasError({ hasError: false, errorMessage: "" });
     setErrorMessage("");
     try {
+      if (loginInput.email.trim() === "") {
+        setEmailHasError({ hasError: true, errorMessage: "Email cannot be empty" });
+        return;
+      }
+
       const response = await login({ variables: { user: loginInput } });
 
       if (response.data) {
@@ -57,6 +64,7 @@ const LoginForm: FC<ToggleForm> = ({ onToggle }) => {
         label="Email"
         size="small"
       />
+      {emailHasError.hasError && <p className="text-red-500 -mt-1">{emailHasError.errorMessage}</p>}
       <TextField
         type="password"
         name="password"
