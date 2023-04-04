@@ -1,4 +1,5 @@
 import Job from "./jobs.model";
+import { spawn } from "child_process";
 
 export async function httpCreateJob(job: any, userId: string) {
   const { title, description, company, salary, location, remote } = job;
@@ -58,6 +59,15 @@ export async function httpGetJob(id: string) {
     if (!job) {
       return { success: false, message: "This job doesn't exist" };
     }
+
+    const jsonJob = JSON.stringify(job);
+    //Recommandation system
+    const pythonProcess = spawn("python", ["../lib/Recommandation.py", jsonJob]);
+
+    pythonProcess.stdout.on("data", (data) => {
+      const recommendations = JSON.parse(data.toString());
+      console.log(recommendations);
+    });
 
     return { success: true, job };
   } catch (error) {

@@ -42,11 +42,7 @@ const HomePage: FC = () => {
 
   return (
     <section id="job-section" className="flex flex-col justify-end gap-8 mt-8 max-w-7xl mx-auto">
-      {/*       <button className="border cursor-pointer w-fit" onClick={handleFilterJobs}>
-        Click to filter non remote jobs
-      </button> */}
       <div className="flex w-full">
-        {/* <div className="bg-black w-1/4 h-screen"></div> */}
         <Filters data={data && data.getJobs} onChange={handleFilterChange} />
         <div className="flex flex-col gap-4 w-3/4">
           {Array.isArray(jobs) && jobs.map((job: any) => <JobCard {...job} key={job.id} />)}
