@@ -16,6 +16,7 @@ const usersSchema = new mongoose.Schema({
   company: {
     type: String,
     minLength: 2,
+    default: null,
   },
   is_company: {
     type: Boolean,

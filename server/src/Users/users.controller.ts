@@ -12,13 +12,26 @@ type UserSignup = {
 };
 
 /**
+ * Registers a new user and saves it to the database.
  *
- * @param user
- * @returns
+ * @param user - UserSignup object containing the user's information.
+ * @returns - The newly registered user or an error object.
+ * @throws - An error if the provided user data is invalid.
  */
+
 export async function signup(user: UserSignup) {
   try {
     const { lastname, firstname, company, email, password } = user;
+
+    if (company) {
+      if (!email || !password) {
+        throw new Error("Email and password are required.");
+      }
+    } else {
+      if (!email || !password || !firstname || !lastname) {
+        throw new Error("Email, password, firstname, and lastname are required.");
+      }
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -34,7 +47,8 @@ export async function signup(user: UserSignup) {
     await newUser.save();
     return newUser;
   } catch (error) {
-    return error;
+    console.error("Error during signup: ", error);
+    throw error;
   }
 }
 
