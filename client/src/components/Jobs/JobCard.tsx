@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 const JobCard: FC = (props: any) => {
   const { title, salary, company, remote, location } = props;
   return (
-    <article className="p-6 mx-auto w-2/4 max-w-4xl border border-blue bg-white rounded-lg">
+    <article className="p-6 mx-auto w-full max-w-4xl border border-blue bg-white rounded-lg">
       <div>
         <h2 className="font-semibold">{title}</h2>
         <p>
