@@ -34,7 +34,7 @@ const CreateJobForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form onSubmit={handleSubmit} className="form ">
       <h2>CREATE JOB</h2>
       <TextField
         name="title"
@@ -68,7 +68,7 @@ const CreateJobForm: FC = () => {
         label="Salary"
         variant="outlined"
         size="small"
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*", min: 0 }}
       />
       <TextField
         type="text"

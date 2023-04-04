@@ -6,6 +6,7 @@ type AuthSliceState = {
     id: string | null;
     displayableName: string | null;
     applications: string[];
+    is_company: boolean;
   };
 };
 
@@ -19,6 +20,7 @@ const initialState: AuthSliceState = {
     id: null,
     displayableName: null,
     applications: [],
+    is_company: false,
   },
 };
 
@@ -51,11 +53,12 @@ const authSlice = createSlice({
 
     getProfile(state, action) {
       const payload = action.payload.currentUser;
+      console.log(payload);
       const displayName = `${payload.firstname} ${payload.lastname}`;
       state.user.id = payload.id;
-      state.user.displayableName = displayName;
+      state.user.displayableName = payload.company || displayName;
       state.user.applications = payload.applications;
-      //payload = id, displayable name || company, is_company, applications
+      state.user.is_company = payload.is_company;
     },
     retriveStoredToken(state) {
       state.isAuthenticated = true;

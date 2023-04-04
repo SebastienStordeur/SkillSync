@@ -11,7 +11,9 @@ const GET_PROFILE_QUERY = gql`
       email
       lastname
       firstname
+      company
       applications
+      is_company
     }
   }
 `;
