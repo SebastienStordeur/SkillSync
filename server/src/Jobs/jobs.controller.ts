@@ -1,5 +1,6 @@
 import Job from "./jobs.model";
 import { spawn } from "child_process";
+import path from "path";
 
 export async function httpCreateJob(job: any, userId: string) {
   const { title, description, company, salary, location, remote } = job;
@@ -52,6 +53,24 @@ export async function httpGetJobs() {
   }
 }
 
+async function getJobsFromPython(jsonJob: any) {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, "../lib/JobRecommender.py");
+    const pythonProcess = spawn("python", [scriptPath, jsonJob]);
+    //const pythonProcess = spawn("python", ["../lib/JobRecommender.py", jsonJob]);
+
+    pythonProcess.stdout.on("data", (data) => {
+      const allJobs = JSON.parse(data.toString());
+      resolve(allJobs);
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+      console.error(`Error from Python script: ${data}`);
+      reject({ success: false, message: "An error has occured. Try again later." });
+    });
+  });
+}
+
 export async function httpGetJob(id: string) {
   try {
     const job = await Job.findOne({ _id: id });
@@ -61,15 +80,14 @@ export async function httpGetJob(id: string) {
     }
 
     const jsonJob = JSON.stringify(job);
-    //Recommandation system
-    const pythonProcess = spawn("python", ["../lib/Recommandation.py", jsonJob]);
+    // Get jobs from Python script
+    const allJobs = await getJobsFromPython(jsonJob);
 
-    pythonProcess.stdout.on("data", (data) => {
-      const recommendations = JSON.parse(data.toString());
-      console.log(recommendations);
-    });
+    console.log(allJobs);
 
-    return { success: true, job };
+    // Perform any additional operations on allJobs
+
+    return job;
   } catch (error) {
     return { success: false, message: "An error has occured. Try again later." };
   }

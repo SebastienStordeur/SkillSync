@@ -8,7 +8,7 @@ const JobPage: FC = () => {
 
   const { loading, error, data } = useQuery(GETJOB_QUERY, { variables: { id: jobId } });
 
-  console.log(jobId);
+  console.log(data && data);
   return <div>JobPage</div>;
 };
 

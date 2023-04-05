@@ -1,6 +1,6 @@
 type Query {
   getJobs: [Job]
-  getJob(id: ID!): getJobResponse
+  getJob(id: ID): Job
 }
 
 type Mutation {

@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-job_offers = [
+""" job_offers = [
     {"id": 1, "title": "Software Engineer", "company": "TechCorp"},
     {"id": 2, "title": "Data Scientist", "company": "DataSolutions"},
     {"id": 3, "title": "Software Engineer", "company": "AmazingSoftware"},
@@ -12,12 +12,11 @@ job_offers = [
     {"id": 8, "title": "Product Manager", "company": "TechCorp"},
     {"id": 9, "title": "Data Scientist", "company": "AmazingSoftware"},
     {"id": 10, "title": "Web Developer", "company": "WebWorld"},
-]
+] """
 
 
 
-def recommend_similar_jobs(job_offers, 
-opened_job_id, num_recommendations=2):
+def recommend_similar_jobs(job_offers, opened_job_id, num_recommendations=2):
     # Create a combined text attribute from the title and company
     for job in job_offers:
         job["combined_text"] = f"{job['title']} {job['company']}"

@@ -11,7 +11,8 @@ module.exports = {
     getJobs: () => {
       return httpGetJobs();
     },
-    getJob: (_: null, args: { id: string }) => {
+    getJob: (_: null, args: { id: any }) => {
+      console.log(args.id);
       return httpGetJob(args.id);
     },
     //get offer with specific entitlement =AKA SEARCh
