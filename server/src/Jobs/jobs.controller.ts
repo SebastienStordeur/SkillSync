@@ -57,7 +57,6 @@ async function getJobsFromPython(jsonJob: any) {
   return new Promise((resolve, reject) => {
     const scriptPath = path.join(__dirname, "../lib/JobRecommender.py");
     const pythonProcess = spawn("python", [scriptPath, jsonJob]);
-    //const pythonProcess = spawn("python", ["../lib/JobRecommender.py", jsonJob]);
 
     pythonProcess.stdout.on("data", (data) => {
       const allJobs = JSON.parse(data.toString());
@@ -81,13 +80,20 @@ export async function httpGetJob(id: string) {
 
     const jsonJob = JSON.stringify(job);
     // Get jobs from Python script
-    const allJobs = await getJobsFromPython(jsonJob);
+    const recommandations = (await getJobsFromPython(jsonJob)) as any[];
 
-    console.log(allJobs);
+    const recommended_jobs: any[] = [];
+
+    for (const recommended_job of recommandations) {
+      const job = await Job.findOne({ _id: recommended_job });
+      recommended_jobs.push(job);
+    }
+
+    console.log("ARRAY OF RECOMMENDATIONS", recommended_jobs);
 
     // Perform any additional operations on allJobs
 
-    return job;
+    return { success: true, message: "", job, recommendations: recommended_jobs };
   } catch (error) {
     return { success: false, message: "An error has occured. Try again later." };
   }

@@ -1,6 +1,6 @@
 type Query {
   getJobs: [Job]
-  getJob(id: ID): Job
+  getJob(id: ID): getJobResponse
 }
 
 type Mutation {
@@ -36,5 +36,6 @@ type DeleteJobResponse {
 type getJobResponse {
   success: Boolean!
   message: String
-  job: Job
+  job: Job!
+  recommendations: [Job]!
 }
