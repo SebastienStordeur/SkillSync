@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { FC, useCallback, useEffect, useState } from "react";
-import GETJOBS_QUERY from "../graphql/QUERY/GetJobQuery";
+import GETJOBS_QUERY from "../graphql/QUERY/GetJobsQuery";
 import JobCard from "../components/Jobs/JobCard";
 import Filters from "../components/filters/Filters";
+import { Link } from "react-router-dom";
 
 const HomePage: FC = () => {
   const { loading, error, data } = useQuery(GETJOBS_QUERY);
@@ -45,7 +46,12 @@ const HomePage: FC = () => {
       <div className="flex w-full">
         <Filters data={data && data.getJobs} onChange={handleFilterChange} />
         <div className="flex flex-col gap-4 w-3/4">
-          {Array.isArray(jobs) && jobs.map((job: any) => <JobCard {...job} key={job.id} />)}
+          {Array.isArray(jobs) &&
+            jobs.map((job: any) => (
+              <Link to={`/job/${job.id}`} key={job.id}>
+                <JobCard {...job} />
+              </Link>
+            ))}
         </div>
       </div>
     </section>

@@ -1,16 +1,14 @@
 import { gql } from "@apollo/client";
 
-const GETJOBS_QUERY = gql`
-  query getJobs {
-    getJobs {
+const GETJOB_QUERY = gql`
+  query getJob {
+    getJob {
       id
       title
+      description
       salary
-      company
-      remote
-      location
     }
   }
 `;
 
-export default GETJOBS_QUERY;
+export default GETJOB_QUERY;
