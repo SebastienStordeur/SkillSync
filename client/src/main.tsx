@@ -1,28 +1,31 @@
-import { ApolloClient, ApolloLink, ApolloProvider, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles/styles.css";
 
+import { setContext } from "@apollo/client/link/context";
+
 import { Provider } from "react-redux";
 import store from "./redux";
 
-const httpLink = createHttpLink({
+const uploadLink = createUploadLink({
   uri: "http://localhost:4000/graphql",
 });
 
-const authMiddleware = new ApolloLink((operation, forward) => {
+const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
-  operation.setContext({
+  return {
     headers: {
+      ...headers,
       authorization: token ? `Bearer ${token}` : "",
     },
-  });
-  return forward(operation);
+  };
 });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([authMiddleware, httpLink]),
+  link: ApolloLink.from([authLink, uploadLink]),
   cache: new InMemoryCache(),
 });
 

@@ -1,3 +1,5 @@
+scalar Upload
+
 type Query {
   GetCurrentUser(id: ID): User
 }
@@ -5,7 +7,7 @@ type Query {
 type Mutation {
   signup(user: UserInput): User
   login(user: LoginInput!): LoginResponse
-  uploadFile(file: Upload!): UploadResponse
+  uploadResume(file: Upload!): UploadResponse
 }
 
 type UploadResponse {
