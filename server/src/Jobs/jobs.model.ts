@@ -9,6 +9,8 @@ const jobsSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: true,
+    minLength: 100,
   },
   company: {
     type: String,
@@ -23,10 +25,7 @@ const jobsSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  remote: {
-    type: Boolean,
-    default: false,
-  },
+
   still_accept: {
     type: Boolean,
     default: true,
@@ -35,6 +34,20 @@ const jobsSchema = new mongoose.Schema({
   applicant_number: {
     type: Array,
     default: [],
+  },
+  extra: {
+    remote: {
+      type: Boolean,
+      default: false,
+    },
+    type: {
+      type: String,
+      default: "Full time",
+    },
+    vacations: {
+      type: Number,
+      default: 0,
+    },
   },
   created_at: {
     type: Date,

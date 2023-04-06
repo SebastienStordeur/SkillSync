@@ -17,7 +17,7 @@ class CustomJSONEncoder(JSONEncoder):
 
 def get_jobs_from_mongodb():
     # Replace these with your MongoDB connection details
-    MONGO_URI = ""
+    MONGO_URI = "mongodb+srv://sebastien:a7esABl85LJKczXx@cluster0.w5se3db.mongodb.net/?retryWrites=true&w=majority"
     DATABASE_NAME = "test"
     COLLECTION_NAME = "jobs"
 
@@ -69,7 +69,7 @@ def main():
 
     # Get recommended job IDs
     recommended_job_ids = recommend_similar_jobs(all_jobs, opened_job_id)
-
+    
 
     # Print the recommended job IDs as JSON
     print(json.dumps(recommended_job_ids))

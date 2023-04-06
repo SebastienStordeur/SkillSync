@@ -3,7 +3,14 @@ import { spawn } from "child_process";
 import path from "path";
 
 export async function httpCreateJob(job: any, userId: string) {
-  const { title, description, company, salary, location, remote } = job;
+  const {
+    title,
+    description,
+    company,
+    salary,
+    location,
+    extra: { remote, type, vacations },
+  } = job;
 
   console.log(job);
   const newJob = new Job({
@@ -12,7 +19,7 @@ export async function httpCreateJob(job: any, userId: string) {
     company,
     salary,
     location,
-    remote,
+    extra: { remote, type, vacations },
     userId,
   });
 
