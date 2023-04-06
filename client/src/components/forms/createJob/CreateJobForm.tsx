@@ -22,7 +22,7 @@ const CreateJobForm: FC = () => {
       .required("Company name is required"),
     salary: Yup.number().min(0, "Salary must be a positive number").required("Salary is required"),
     location: Yup.string().required("Location is required"),
-    jobType: Yup.string().required("Job type is required"),
+    type: Yup.string().required("Job type is required"),
     vacations: Yup.number().min(0, "Vacations must be a positive number").required("Vacations is required"),
   });
 
@@ -40,7 +40,7 @@ const CreateJobForm: FC = () => {
         salary: 0,
         location: "",
         remote: false,
-        jobType: "Full time",
+        type: "Full time",
         vacations: 0,
       }}
       validationSchema={validationSchema}
@@ -65,7 +65,7 @@ const CreateJobForm: FC = () => {
           />
           <FormControl fullWidth size="small" variant="outlined">
             <InputLabel id="type-label">Job Type</InputLabel>
-            <Field as={Select} name="jobType" labelId="type-label" label="Job Type">
+            <Field as={Select} name="type" labelId="type-label" label="Job Type">
               <MenuItem value="Full time">Full time</MenuItem>
               <MenuItem value="Part time">Part time</MenuItem>
             </Field>

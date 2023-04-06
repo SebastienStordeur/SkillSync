@@ -10,13 +10,21 @@ type Mutation {
 
 type Job {
   id: ID
-  title: String
-  description: String
+  title: String!
+  description: String!
   company: String!
   salary: Int!
   location: String
   remote: Boolean
+  type: String
+  vacations: Int
   userId: ID
+}
+
+input ExtraInput {
+  remote: Boolean
+  type: String
+  vacations: Int
 }
 
 input JobInput {
@@ -25,7 +33,10 @@ input JobInput {
   company: String!
   salary: Int
   location: String
+  extra: ExtraInput
   remote: Boolean
+  type: String
+  vacations: Int
 }
 
 type DeleteJobResponse {

@@ -1,5 +1,3 @@
-scalar Upload
-
 type Query {
   GetCurrentUser(id: ID): User
 }
@@ -9,6 +7,8 @@ type Mutation {
   login(user: LoginInput!): LoginResponse
   uploadResume(file: Upload!): UploadResponse
 }
+
+scalar Upload
 
 type UploadResponse {
   success: Boolean!

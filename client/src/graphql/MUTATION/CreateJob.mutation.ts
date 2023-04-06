@@ -9,6 +9,8 @@ const CREATE_JOB_MUTATION = gql`
       company
       salary
       remote
+      type
+      vacations
     }
   }
 `;
