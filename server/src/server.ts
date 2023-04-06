@@ -50,7 +50,7 @@ async function startAppoloServer() {
 
   await server.start();
   await mongoose.connect(MONGO_URL);
-  server.applyMiddleware({ app, path: "/graphql" });
+  server.applyMiddleware({ app });
 
   app.use(helmet());
   app.use(cors());

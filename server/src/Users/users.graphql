@@ -5,6 +5,14 @@ type Query {
 type Mutation {
   signup(user: UserInput): User
   login(user: LoginInput!): LoginResponse
+  uploadFile(file: Upload!): UploadResponse
+}
+
+type UploadResponse {
+  success: Boolean!
+  message: String
+  filename: String
+  path: String
 }
 
 type User {
