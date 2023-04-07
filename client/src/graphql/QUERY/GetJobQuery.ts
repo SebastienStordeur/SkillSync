@@ -11,7 +11,11 @@ const GETJOB_QUERY = gql`
         salary
         company
         location
-        remote
+        extra {
+          remote
+          type
+          vacations
+        }
       }
       recommendations {
         id
@@ -20,7 +24,11 @@ const GETJOB_QUERY = gql`
         salary
         company
         location
-        remote
+        extra {
+          remote
+          type
+          vacations
+        }
       }
     }
   }

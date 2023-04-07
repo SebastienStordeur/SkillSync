@@ -2,10 +2,9 @@ import { FC, Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { authActions } from "../../redux/Auth/auth";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import Backdrop from "../Modal/Backdrop";
-import logo from "../../assets/logo.png";
 
 const Navbar: FC = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -27,8 +26,6 @@ const Navbar: FC = () => {
             Find Job
           </Link>
         </div>
-
-        <TextField label="Search a job" size="small" />
         {!isAuthenticated && (
           <Link to="/auth">
             <Button variant="outlined">Login</Button>

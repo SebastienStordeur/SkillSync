@@ -15,10 +15,14 @@ type Job {
   company: String!
   salary: Int!
   location: String
+  extra: Extra
+  userId: ID
+}
+
+type Extra {
   remote: Boolean
   type: String
   vacations: Int
-  userId: ID
 }
 
 input ExtraInput {
@@ -34,9 +38,6 @@ input JobInput {
   salary: Int
   location: String
   extra: ExtraInput
-  remote: Boolean
-  type: String
-  vacations: Int
 }
 
 type DeleteJobResponse {

@@ -2,11 +2,17 @@ import React, { FC, Fragment } from "react";
 
 export interface JobProps {
   job: {
+    id?: string;
     title: string;
     description: string;
     location: string;
     company: string;
     salary: number;
+    extra: {
+      remote: boolean;
+      type: string;
+      vacations: number;
+    };
   };
 }
 

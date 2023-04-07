@@ -9,6 +9,11 @@ const GETJOBS_QUERY = gql`
       company
       remote
       location
+      extra {
+        remote
+        type
+        vacations
+      }
       userId
     }
   }

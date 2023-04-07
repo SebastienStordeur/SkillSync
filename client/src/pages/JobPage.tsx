@@ -9,6 +9,8 @@ const JobPage: FC = () => {
   const { jobId } = useParams();
   const { loading, error, data } = useQuery(GETJOB_QUERY, { variables: { id: jobId } });
 
+  console.log(data && data);
+
   return (
     <section id="current-job-section" className="px-6 py-10 md:flex md:gap-12">
       {loading && <p className="w-screen text-2xl text-center mt-10">We are fetching your data, please wait.</p>}
