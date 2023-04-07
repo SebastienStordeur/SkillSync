@@ -5,6 +5,7 @@ import { authActions } from "../../redux/Auth/auth";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import Backdrop from "../Modal/Backdrop";
+import logo from "../../assets/logo.png";
 
 const Navbar: FC = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -18,11 +19,15 @@ const Navbar: FC = () => {
   return (
     <Fragment>
       <nav className="flex justify-between items-center h-16 px-6">
-        <ul>
-          <li>Find Job</li>
-          <li></li>
-          <li></li>
-        </ul>
+        <div className="flex items-center gap-8 w-fit h-full">
+          <div className="flex items-center justify-center border border-blue p-2">
+            <h1 className="text-blue text-xl font-bold">SkillSync</h1>
+          </div>
+          <Link to="/" className="text-lg">
+            Find Job
+          </Link>
+        </div>
+
         <TextField label="Search a job" size="small" />
         {!isAuthenticated && (
           <Link to="/auth">
@@ -36,6 +41,7 @@ const Navbar: FC = () => {
                 Add Job
               </Button>
             )}
+            {!currentUser.is_company && <Button variant="contained">Upload CV</Button>}
             <span>{currentUser.displayableName}</span>
             <Button variant="outlined" onClick={() => dispatch(authActions.logout())}>
               Logout
