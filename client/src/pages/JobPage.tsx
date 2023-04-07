@@ -7,19 +7,22 @@ import Recommendation from "../components/Jobs/Recommendation";
 
 const JobPage: FC = () => {
   const { jobId } = useParams();
-
   const { loading, error, data } = useQuery(GETJOB_QUERY, { variables: { id: jobId } });
 
   return (
-    <section id="current-job-section" className="p-6">
-      {loading && <p>Data are loading</p>}
-      {data && <Job job={data.getJob.job} />}
+    <section id="current-job-section" className="px-6 py-10 md:flex md:gap-12">
+      {loading && <p className="w-screen text-2xl text-center mt-10">We are fetching your data, please wait.</p>}
+      <div className="md:w-3/4">{data && <Job job={data.getJob.job} />}</div>
       <div className="">
-        <h4 className="font-semibold text-xl">Recommendations based on this job</h4>
-        {data &&
-          data.getJob.recommendations.map((recommendedJob: any) => (
-            <Recommendation job={recommendedJob} key={recommendedJob.id} />
-          ))}
+        {data && data.getJob.recommendations && (
+          <h4 className="font-semibold text-xl my-8 md:mt-0">Recommendations based on this job</h4>
+        )}
+        <div className="flex flex-col gap-8">
+          {data &&
+            data.getJob.recommendations.map((recommendedJob: any) => (
+              <Recommendation job={recommendedJob} key={recommendedJob.id} />
+            ))}
+        </div>
       </div>
     </section>
   );

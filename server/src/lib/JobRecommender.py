@@ -15,7 +15,7 @@ class CustomJSONEncoder(JSONEncoder):
         return super(CustomJSONEncoder, self).default(obj)
 
 
-def recommend_similar_jobs(job_offers, opened_job_id, num_recommendations=2):
+def recommend_similar_jobs(job_offers, opened_job_id, num_recommendations=3):
     # Create a combined text attribute from the title and company
     for job in job_offers:
         job["combined_text"] = f"{job['title']} {job['company']}"
