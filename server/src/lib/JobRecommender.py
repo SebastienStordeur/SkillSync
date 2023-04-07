@@ -1,6 +1,5 @@
-import sys
 import json
-from pymongo import MongoClient
+import argparse
 from bson.objectid import ObjectId
 from json import JSONEncoder
 from datetime import datetime
@@ -15,18 +14,6 @@ class CustomJSONEncoder(JSONEncoder):
             return obj.isoformat()
         return super(CustomJSONEncoder, self).default(obj)
 
-def get_jobs_from_mongodb():
-    # Replace these with your MongoDB connection details
-    MONGO_URI = "mongodb+srv://sebastien:a7esABl85LJKczXx@cluster0.w5se3db.mongodb.net/?retryWrites=true&w=majority"
-    DATABASE_NAME = "test"
-    COLLECTION_NAME = "jobs"
-
-    client = MongoClient(MONGO_URI)
-    db = client[DATABASE_NAME]
-    jobs_collection = db[COLLECTION_NAME]
-
-    jobs = list(jobs_collection.find({}))
-    return jobs
 
 def recommend_similar_jobs(job_offers, opened_job_id, num_recommendations=2):
     # Create a combined text attribute from the title and company
@@ -60,16 +47,21 @@ def recommend_similar_jobs(job_offers, opened_job_id, num_recommendations=2):
 
     return recommended_job_ids
 
-def main():
-    # Get jobs from MongoDB
-    all_jobs = get_jobs_from_mongodb()
 
-    # Example opened_job_id
-    opened_job_id = "642dc2bfa3f449a23c559901"
+
+# Modify the main function like this
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("opened_job_id", help="Job ID of the opened job")
+    parser.add_argument("all_jobs", help="JSON string of all jobs")
+    args = parser.parse_args()
+
+    # Parse the command line arguments
+    opened_job_id = args.opened_job_id
+    all_jobs = json.loads(args.all_jobs)
 
     # Get recommended job IDs
     recommended_job_ids = recommend_similar_jobs(all_jobs, opened_job_id)
-    
 
     # Print the recommended job IDs as JSON
     print(json.dumps(recommended_job_ids))

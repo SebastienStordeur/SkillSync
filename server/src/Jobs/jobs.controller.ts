@@ -25,8 +25,6 @@ export async function httpDeleteJob(id: string, userId: string) {
   try {
     const foundJob = await Job.findOne({ _id: id });
 
-    console.log(userId === foundJob!.userId);
-
     if (!foundJob) {
       return { success: false, message: "This job doesn't exist" };
     }
@@ -45,17 +43,16 @@ export async function httpDeleteJob(id: string, userId: string) {
 export async function httpGetJobs() {
   try {
     const jobs = await Job.find();
-    /* console.log(jobs); */
     return jobs;
   } catch (error) {
     return { success: false, message: "An error has occured. Try again later." };
   }
 }
 
-async function getJobsFromPython(jsonJob: any) {
+async function getJobsFromPython(jsonJob: any, jobList: any) {
   return new Promise((resolve, reject) => {
     const scriptPath = path.join(__dirname, "../lib/JobRecommender.py");
-    const pythonProcess = spawn("python", [scriptPath, jsonJob]);
+    const pythonProcess = spawn("python", [scriptPath, jsonJob, jobList]);
 
     pythonProcess.stdout.on("data", (data) => {
       const allJobs = JSON.parse(data.toString());
@@ -77,9 +74,10 @@ export async function httpGetJob(id: string) {
       return { success: false, message: "This job doesn't exist" };
     }
 
-    const jsonJob = JSON.stringify(job);
+    const jobList = JSON.stringify(await Job.find({}));
+
     // Get jobs from Python script
-    const recommandations = (await getJobsFromPython(jsonJob)) as any[];
+    const recommandations = (await getJobsFromPython(id, jobList)) as any[];
 
     const recommended_jobs: any[] = [];
 
@@ -87,10 +85,6 @@ export async function httpGetJob(id: string) {
       const job = await Job.findOne({ _id: recommended_job });
       recommended_jobs.push(job);
     }
-
-    console.log("ARRAY OF RECOMMENDATIONS", recommended_jobs);
-
-    // Perform any additional operations on allJobs
 
     return { success: true, message: "", job, recommendations: recommended_jobs };
   } catch (error) {
