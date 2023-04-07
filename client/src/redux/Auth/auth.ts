@@ -53,7 +53,6 @@ const authSlice = createSlice({
 
     getProfile(state, action) {
       const payload = action.payload.currentUser;
-      console.log(payload);
       const displayName = `${payload.firstname} ${payload.lastname}`;
       state.user.id = payload.id;
       state.user.displayableName = payload.company || displayName;

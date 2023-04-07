@@ -3,8 +3,6 @@ import { FC, useCallback, useEffect, useState } from "react";
 import GETJOBS_QUERY from "../graphql/QUERY/GetJobsQuery";
 import JobCard from "../components/Jobs/JobCard";
 import Filters from "../components/filters/Filters";
-import { Link } from "react-router-dom";
-import UploadResume from "../components/forms/UploadResume/UploadResume";
 
 const HomePage: FC = () => {
   const { loading, error, data } = useQuery(GETJOBS_QUERY);
@@ -22,12 +20,10 @@ const HomePage: FC = () => {
   const handleFilterJobs = useCallback(() => {
     if (data) {
       const filteredJobs = data.getJobs.filter((job: any) => {
-        const remoteFilter = filters.remote === false || job.remote === true;
+        const remoteFilter = filters.remote === false || job.extra.remote === true;
         const minSalaryFilter = job.salary >= filters.minSalary;
-
         return remoteFilter && minSalaryFilter;
       });
-
       setJobs(filteredJobs);
     }
   }, [data, filters]);
@@ -44,7 +40,6 @@ const HomePage: FC = () => {
 
   return (
     <section id="job-section" className="flex flex-col justify-end gap-8 mt-8 max-w-7xl mx-auto">
-      <UploadResume />
       <div className="flex w-full">
         <Filters data={data && data.getJobs} onChange={handleFilterChange} />
         <div className="flex flex-col gap-4 w-3/4">

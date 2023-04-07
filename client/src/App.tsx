@@ -2,21 +2,8 @@ import { useEffect } from "react";
 import Router from "./router/Router";
 import { useDispatch } from "react-redux";
 import { authActions } from "./redux/Auth/auth";
-import { gql, useQuery } from "@apollo/client";
-
-const GET_PROFILE_QUERY = gql`
-  query GetCurrentUser {
-    GetCurrentUser {
-      id
-      email
-      lastname
-      firstname
-      company
-      applications
-      is_company
-    }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import GET_PROFILE_QUERY from "./graphql/QUERY/GetProfileQuery";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -35,7 +22,7 @@ function App() {
       const currentUser = data.GetCurrentUser;
       dispatch(authActions.getProfile({ currentUser }));
     }
-  }, [data]);
+  }, [data, token]);
 
   return (
     <div className="App">

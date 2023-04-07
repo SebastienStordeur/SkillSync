@@ -33,6 +33,7 @@ const LoginForm: FC<ToggleForm> = ({ onToggle }) => {
         if (success) {
           const payload = { token };
           dispatch(authActions.login(payload));
+          location.reload();
         }
 
         setErrorMessage(message);
