@@ -9,6 +9,7 @@ const GETJOBS_QUERY = gql`
       company
       remote
       location
+      userId
     }
   }
 `;

@@ -48,12 +48,7 @@ const HomePage: FC = () => {
       <div className="flex w-full">
         <Filters data={data && data.getJobs} onChange={handleFilterChange} />
         <div className="flex flex-col gap-4 w-3/4">
-          {Array.isArray(jobs) &&
-            jobs.map((job: any) => (
-              <Link to={`/job/${job.id}`} key={job.id}>
-                <JobCard {...job} />
-              </Link>
-            ))}
+          {Array.isArray(jobs) && jobs.map((job: any) => <JobCard {...job} key={job.id} />)}
         </div>
       </div>
     </section>
