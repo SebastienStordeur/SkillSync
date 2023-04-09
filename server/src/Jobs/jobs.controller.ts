@@ -92,3 +92,12 @@ export async function httpGetJob(id: string) {
     return { success: false, message: "An error has occured. Try again later." };
   }
 }
+
+export async function applyToJob(id: string, userId: string) {
+  try {
+    const job = await Job.findOne({ _id: id });
+    console.log(job);
+  } catch (error) {
+    return { success: false, message: "An error has occured. Try again later." };
+  }
+}

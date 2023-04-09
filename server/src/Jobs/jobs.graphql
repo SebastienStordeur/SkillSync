@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   createJob(job: JobInput, userId: ID): Job
   deleteJob(id: ID!, userId: ID): DeleteJobResponse
+  applyToJob(id: ID!, userId: ID): applicationResponse
 }
 
 type Job {
@@ -50,4 +51,9 @@ type getJobResponse {
   message: String
   job: Job!
   recommendations: [Job]!
+}
+
+type applicationResponse {
+  success: Boolean!
+  message: String
 }
