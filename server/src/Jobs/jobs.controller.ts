@@ -1,4 +1,5 @@
 import Job from "./jobs.model";
+import User from "../Users/users.model";
 import { spawn } from "child_process";
 import path from "path";
 
@@ -96,7 +97,20 @@ export async function httpGetJob(id: string) {
 export async function applyToJob(id: string, userId: string) {
   try {
     const job = await Job.findOne({ _id: id });
-    console.log(job);
+
+    const hasApplied = job?.applicant_number.some((value) => {
+      return value === userId;
+    });
+
+    (async () => {
+      hasApplied
+        ? null
+        : await Job.findByIdAndUpdate(id, {
+            $push: { applicant_number: userId },
+          });
+    })();
+
+    return { success: true };
   } catch (error) {
     return { success: false, message: "An error has occured. Try again later." };
   }
