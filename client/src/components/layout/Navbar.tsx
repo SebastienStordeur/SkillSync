@@ -38,7 +38,7 @@ const Navbar: FC = () => {
                 Add Job
               </Button>
             )}
-            {!currentUser.is_company && <Button variant="contained">Upload CV</Button>}
+
             <span>{currentUser.displayableName}</span>
             <Button variant="outlined" onClick={() => dispatch(authActions.logout())}>
               Logout

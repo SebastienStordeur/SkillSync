@@ -44,10 +44,8 @@ const LoginForm: FC<ToggleForm> = ({ onToggle }) => {
   };
 
   return (
-    <div>
-      <Typography variant="h2" className="font-semibold text-3xl">
-        Login
-      </Typography>
+    <div className="w-full max-w-4xl absolute left-2/4 -translate-x-2/4">
+      <h2 className="font-semibold text-2xl text-center">Login</h2>
       <Formik initialValues={{ email: "", password: "" }} validationSchema={loginSchema} onSubmit={handleLogin}>
         {() => (
           <Form>

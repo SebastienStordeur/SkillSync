@@ -40,7 +40,7 @@ const JobCard: FC = (props: any) => {
     <Fragment>
       <article
         onClick={navigateToJobDetails}
-        className="p-6 mx-auto w-full max-w-4xl cursor-pointer border border-blue bg-white rounded-lg"
+        className="p-6 mx-auto w-full lg:max-w-4xl cursor-pointer border border-blue bg-white rounded-lg"
       >
         <div>
           <h2 className="font-semibold">{title}</h2>

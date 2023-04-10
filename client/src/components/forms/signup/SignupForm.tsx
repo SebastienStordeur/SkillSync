@@ -40,8 +40,8 @@ const SignupForm: FC<ToggleForm> = ({ onToggle }) => {
   };
 
   return (
-    <div className="form">
-      <h2 className="font-semibold text-3xl">Signup</h2>
+    <div className="w-full max-w-4xl absolute left-2/4 -translate-x-2/4">
+      <h2 className="font-semibold text-2xl text-center">Signup</h2>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         {({ resetForm }) => (
           <Form style={{ gap: "12px" }}>
