@@ -17,7 +17,7 @@ const Navbar: FC = () => {
 
   return (
     <Fragment>
-      <nav className="flex justify-between items-center h-16 px-6">
+      <nav className="flex flex-col sm:flex-row justify-between items-center h-24 sm:h-16 px-6">
         <div className="flex items-center gap-8 w-fit h-full">
           <div className="flex items-center justify-center border border-blue p-2">
             <h1 className="text-blue text-xl font-bold">SkillSync</h1>

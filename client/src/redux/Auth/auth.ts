@@ -55,7 +55,7 @@ const authSlice = createSlice({
       const payload = action.payload.currentUser;
       const displayName = `${payload.firstname} ${payload.lastname}`;
       state.user.id = payload.id;
-      state.user.displayableName = payload.company || displayName;
+      state.user.displayableName = payload.firstname !== null ? displayName : payload.company;
       state.user.applications = payload.applications;
       state.user.is_company = payload.is_company;
     },

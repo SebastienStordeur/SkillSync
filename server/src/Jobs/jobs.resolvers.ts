@@ -14,7 +14,6 @@ module.exports = {
     getJob: (_: null, args: { id: any }) => {
       return httpGetJob(args.id);
     },
-    //get offer with specific entitlement =AKA SEARCh
   },
   Mutation: {
     createJob: (_: null, args: any, context: any) => {
