@@ -40,7 +40,7 @@ const HomePage: FC = () => {
 
   return (
     <section id="job-section" className="flex flex-col justify-end gap-8 mt-8 max-w-7xl mx-auto">
-      <div className="flex w-full">
+      <div className="flex flex-col lg:flex-row w-full px-10">
         <Filters data={data && data.getJobs} onChange={handleFilterChange} />
         <div className="flex flex-col gap-4 w-3/4">
           {Array.isArray(jobs) && jobs.map((job: any) => <JobCard {...job} key={job.id} />)}

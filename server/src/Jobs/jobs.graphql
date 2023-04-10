@@ -18,6 +18,7 @@ type Job {
   location: String
   extra: Extra
   userId: ID
+  applicant_number: [String]
 }
 
 type Extra {

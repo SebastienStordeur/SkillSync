@@ -16,6 +16,7 @@ const GETJOB_QUERY = gql`
           type
           vacations
         }
+        applicant_number
       }
       recommendations {
         id

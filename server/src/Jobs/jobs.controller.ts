@@ -16,9 +16,6 @@ export async function httpCreateJob(job: any, userId: string) {
     userId,
   });
 
-  console.log(newJob);
-  //checking if required fields are here
-  //validating fields
   await newJob.save();
   return newJob;
 }

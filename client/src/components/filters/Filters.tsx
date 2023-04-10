@@ -7,8 +7,6 @@ interface Filters {
 }
 
 const Filters: FC<Filters> = ({ data, onChange }) => {
-  console.log("DATA", data);
-
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     onChange(name, checked);
@@ -17,11 +15,8 @@ const Filters: FC<Filters> = ({ data, onChange }) => {
   const handleSliderChange = (name: string, value: number) => {
     onChange(name, value);
   };
-
   return (
-    //Remote, salary, date de publication
-
-    <div className="w-1/4 h-screen">
+    <div className="w-full lg:w-1/4">
       <div>
         Remote:
         <Checkbox name="remote" onChange={handleCheckboxChange} />
@@ -34,7 +29,7 @@ const Filters: FC<Filters> = ({ data, onChange }) => {
           aria-label="Always visible"
           defaultValue={20000}
           step={5000}
-          valueLabelDisplay="on"
+          valueLabelDisplay="auto"
           min={10000}
           max={300000}
         />

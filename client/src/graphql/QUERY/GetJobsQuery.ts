@@ -14,6 +14,7 @@ const GETJOBS_QUERY = gql`
         vacations
       }
       userId
+      applicant_number
     }
   }
 `;
